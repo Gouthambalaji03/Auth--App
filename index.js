@@ -19,7 +19,7 @@ connectDB();
 
 //Default routes
 app.get("/", (req, res) => {
-    res.status(200).send("Welcome to API")
+    res.status(200).send("Welcome to Authentication and Authorization App");
 });
 
 //Custom routes
