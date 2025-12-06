@@ -2,14 +2,14 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import connectDB from './Database/dbConfig.js'
-
-
+import authRoute from "./Routers/authRouter.js"
 
 // Dotenv config
 dotenv.config();
 
 // Express app initialization
 const app = express();
+
 
 // Middlewares
 app.use(cors());
@@ -22,13 +22,15 @@ app.get("/", (req, res) => {
     res.status(200).send("Welcome to API")
 });
 
+//Custom routes
+app.use("/api/auth", authRoute);
+
 
 //PORT
 const port = process.env.PORT || 5000;
 
 
 // Server Listening logic
-
 app.listen(port, ()=>{
     console.log("Server running on port 3000")
 });

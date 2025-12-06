@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 import dotenv from "dotenv"
+dotenv.config();
 
 const userSchema = mongoose.Schema(
     {
@@ -11,22 +12,25 @@ const userSchema = mongoose.Schema(
             type: String,
             required: [true, 'Please add an email'],
             unique: true,
-            match: [
-                /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-                'Please fill a valid email address',
-            ],
         },
         password: {
             type: String,
             required: [true, 'Please add a password'],
         },
+        role: {
+            type: String,
+            enum: ['user', 'admin'],
+            default: 'user',
+        },
+        token: {
+            type: String,
+        }
     },
-    {
-        timestamps: true,
-    }
 );
 
 
-const Users = mongoose.model("User", userSchema);
 
-export default Users;
+
+const User = mongoose.model("User", userSchema);
+
+export default User;
